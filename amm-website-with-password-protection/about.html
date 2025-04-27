@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Anuradha Minerals and Metals</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for About page */
+        .about-hero {
+            min-height: 60vh;
+        }
+
+        .vision-timeline {
+            max-width: 900px;
+            margin: 3rem auto;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .vision-timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--secondary), transparent);
+            transform: translateX(-50%);
+            z-index: 1;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            width: 100%;
+            transform-style: preserve-3d;
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-content {
+            width: 40%;
+            padding: 1.2rem;
+            background: rgba(245, 240, 225, 0.95);
+            border: 1px solid rgba(201, 166, 100, 0.3);
+            border-radius: 4px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 15px rgba(201, 166, 100, 0.1);
+            position: relative;
+            color: var(--text-dark);
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            max-width: 300px;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(201, 166, 100, 0.05), transparent 70%);
+            z-index: 0;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px) translateZ(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 20px rgba(201, 166, 100, 0.2);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            float: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            float: left;
+        }
+
+        .timeline-item::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .timeline-icon {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--cream);
+            border: 3px solid var(--secondary);
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.2rem;
+            z-index: 2;
+            box-shadow: 0 0 15px rgba(201, 166, 100, 0.4);
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            color: var(--primary);
+            margin-bottom: 0.6rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.5px;
+            z-index: 1;
+        }
+
+        .timeline-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, var(--secondary), transparent);
+        }
+
+        .timeline-text {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+            max-width: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .vision-timeline::before {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 80px);
+                float: right;
+                margin-left: 80px;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                float: right;
+            }
+
+            .timeline-icon {
+                left: 30px;
+                transform: translateX(-50%);
+            }
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 4rem auto;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, var(--secondary), transparent);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 3rem;
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 3rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 2.5rem;
+            width: 20px;
+            height: 20px;
+            background: var(--secondary);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--secondary);
+        }
+
+        .timeline-item:nth-child(odd)::before {
+            right: -10px;
+        }
+
+        .timeline-item:nth-child(even)::before {
+            left: -10px;
+        }
+
+        .timeline-date {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-content {
+            background: rgba(15, 52, 96, 0.3);
+            border: 1px solid rgba(201, 166, 100, 0.2);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: var(--transition);
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 0 15px rgba(201, 166, 100, 0.2);
+            border-color: rgba(201, 166, 100, 0.4);
+        }
+
+        .timeline-text {
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--cream);
+        }
+
+        .timeline-detail {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            line-height: 1.6;
+            color: var(--cream);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-grid {
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            max-width: 400px;
+            background: rgba(245, 240, 225, 0.95);
+            border: 1px solid rgba(201, 166, 100, 0.3);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 15px rgba(201, 166, 100, 0.1);
+        }
+
+        .team-member::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(201, 166, 100, 0.05), transparent 70%);
+            z-index: 0;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px) translateZ(20px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15), 0 0 25px rgba(201, 166, 100, 0.2);
+            border-color: rgba(201, 166, 100, 0.5);
+        }
+
+        .member-image {
+            height: 220px;
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid rgba(201, 166, 100, 0.3);
+        }
+
+        .member-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 30%;
+            background: linear-gradient(to top, rgba(6, 10, 30, 0.9), transparent);
+        }
+
+        .member-info {
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            color: var(--text-dark);
+        }
+
+        .member-info h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .member-position {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.8rem;
+        }
+
+        .member-position::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--secondary), transparent);
+        }
+
+        .member-info p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1.05rem;
+            color: var(--text-dark);
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .member-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+            border: 1px solid rgba(201, 166, 100, 0.3);
+            border-radius: 50%;
+            font-size: 1.1rem;
+            color: var(--secondary);
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateZ(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(201, 166, 100, 0.1);
+        }
+
+        .member-social a:hover {
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.95), rgba(6, 10, 30, 1));
+            transform: translateY(-5px) translateZ(10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(201, 166, 100, 0.3);
+            color: var(--secondary-light);
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 30px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 5rem;
+                padding-right: 1rem;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                padding-right: 1rem;
+                text-align: left;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+            }
+
+            .timeline-item:nth-child(odd)::before {
+                right: auto;
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="futuristic-background">
+        <div class="grid-overlay"></div>
+        <div class="glow-effect glow-1"></div>
+        <div class="glow-effect glow-2"></div>
+        <div class="glow-effect glow-3"></div>
+        <div class="light-beam"></div>
+        <div class="particles"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="images/amm-logo-official.svg" alt="AMM Logo" class="logo-image">
+                    <div class="logo-glow"></div>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="products.html">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero about-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="glitch-text" data-text="About Us">About Us</h1>
+                    <p class="subtitle">Our Vision & Values</p>
+                    <p class="description">Learn about Anuradha Minerals and Metals, a dynamic trading company specializing in high-quality minerals and metals with a focus on professionalism, trust, and reliable sourcing.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="about-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Strategic Pillars</h2>
+                    <p>The foundation of our business philosophy</p>
+                </div>
+
+                <div class="vision-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Vision</h3>
+                            <p class="timeline-text">To become a leading name in global minerals and metals trading with a focus on transparency, quality, and value creation for all stakeholders.</p>
+                            <p class="timeline-detail">We envision a future where AMM is recognized globally for setting industry standards in quality, reliability, and customer satisfaction.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Mission</h3>
+                            <p class="timeline-text">To supply high-quality minerals and metals through reliable sourcing, ensuring consistent quality and building trust-based relationships.</p>
+                            <p class="timeline-detail">Our mission is to bridge the gap between quality mineral producers and industries that require premium raw materials, creating value at every step of the supply chain.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Growth Strategy</h3>
+                            <p class="timeline-text">Expanding our market presence through innovation, quality excellence, and strategic partnerships that drive sustainable growth.</p>
+                            <p class="timeline-detail">We are committed to expanding our product portfolio, entering new markets, and investing in technology to streamline operations and enhance customer experience.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Partnerships</h3>
+                            <p class="timeline-text">Building strong relationships with clients and suppliers who share our values of integrity, quality, and excellence in the minerals and metals industry.</p>
+                            <p class="timeline-detail">We believe in creating long-term partnerships based on mutual trust, transparency, and shared success, working collaboratively to overcome challenges and seize opportunities.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Global Reach</h3>
+                            <p class="timeline-text">Establishing a strong international presence by connecting quality suppliers with industries across the globe.</p>
+                            <p class="timeline-detail">Our strategic approach to global expansion focuses on understanding local market needs while maintaining our commitment to quality and reliability in every region we serve.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="timeline-content">
+                            <h3 class="timeline-title">Sustainability</h3>
+                            <p class="timeline-text">Committing to responsible sourcing practices that minimize environmental impact and promote sustainable development.</p>
+                            <p class="timeline-detail">We are dedicated to implementing eco-friendly practices throughout our supply chain, ensuring that our business operations contribute positively to both the industry and the planet.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="director-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Message from the Managing Director</h2>
+                    <p>Leadership with vision and purpose</p>
+                </div>
+
+                <div class="director-message">
+                    <div class="director-image-container">
+                        <div class="director-image-frame">
+                            <div class="director-image">
+                                <i class="fas fa-user"></i>
+                                <span>Anuradha Singh</span>
+                            </div>
+                        </div>
+                        <div class="director-social">
+                            <a href="#"><i class="fab fa-linkedin"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
+                    <div class="director-content">
+                        <h3>Anuradha Singh</h3>
+                        <p class="director-title">Managing Director & Founder</p>
+                        <div class="director-quote">
+                            <i class="fas fa-quote-left quote-icon"></i>
+                            <p>At Anuradha Minerals and Metals, we are committed to excellence in everything we do. Our journey is defined by our dedication to quality, integrity, and building lasting relationships with our clients and partners.</p>
+                        </div>
+                        <p>With a focus on sustainable growth and innovation, we strive to be at the forefront of the minerals and metals trading industry. Our team works tirelessly to ensure that we deliver products that meet the highest standards of quality and consistency.</p>
+                        <p>We look forward to partnering with you and contributing to your success.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <style>
+            .director-section {
+                padding: 5rem 0;
+                position: relative;
+            }
+
+            .director-message {
+                display: flex;
+                gap: 3rem;
+                margin-top: 3rem;
+                align-items: flex-start;
+            }
+
+            .director-image-container {
+                flex: 0 0 300px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .director-image-frame {
+                width: 100%;
+                height: 350px;
+                border: 1px solid rgba(201, 166, 100, 0.3);
+                border-radius: 4px;
+                overflow: hidden;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(201, 166, 100, 0.1);
+                margin-bottom: 1.5rem;
+                background: rgba(245, 240, 225, 0.95);
+            }
+
+            .director-image {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: 1rem;
+                font-size: 5rem;
+                color: var(--primary);
+            }
+
+            .director-image span {
+                font-size: 1.2rem;
+                color: var(--primary);
+            }
+
+            .director-social {
+                display: flex;
+                gap: 1rem;
+            }
+
+            .director-social a {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 40px;
+                height: 40px;
+                background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+                border: 1px solid rgba(201, 166, 100, 0.3);
+                border-radius: 50%;
+                font-size: 1.1rem;
+                color: var(--secondary);
+                transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(201, 166, 100, 0.1);
+            }
+
+            .director-social a:hover {
+                background: linear-gradient(145deg, rgba(10, 15, 44, 0.95), rgba(6, 10, 30, 1));
+                transform: translateY(-5px);
+                box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(201, 166, 100, 0.3);
+                color: var(--secondary-light);
+            }
+
+            .director-content {
+                flex: 1;
+                background: rgba(245, 240, 225, 0.95);
+                border: 1px solid rgba(201, 166, 100, 0.3);
+                border-radius: 4px;
+                padding: 2rem;
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(201, 166, 100, 0.1);
+                color: var(--text-dark);
+                position: relative;
+            }
+
+            .director-content::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(circle at top right, rgba(201, 166, 100, 0.05), transparent 70%);
+                z-index: 0;
+            }
+
+            .director-content h3 {
+                font-size: 1.8rem;
+                color: var(--primary);
+                margin-bottom: 0.5rem;
+                font-family: 'Rajdhani', sans-serif;
+                letter-spacing: 1px;
+                position: relative;
+                z-index: 1;
+            }
+
+            .director-title {
+                color: var(--primary);
+                font-size: 1.1rem;
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+                position: relative;
+                display: inline-block;
+                padding-bottom: 0.5rem;
+                z-index: 1;
+            }
+
+            .director-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 40px;
+                height: 2px;
+                background: linear-gradient(to right, var(--secondary), transparent);
+            }
+
+            .director-quote {
+                position: relative;
+                margin-bottom: 1.5rem;
+                padding: 1rem 0 1rem 2rem;
+                border-left: 3px solid var(--secondary);
+                background: rgba(201, 166, 100, 0.05);
+                z-index: 1;
+            }
+
+            .quote-icon {
+                position: absolute;
+                top: 0.5rem;
+                left: 0.5rem;
+                font-size: 1.2rem;
+                color: var(--secondary);
+                opacity: 0.5;
+            }
+
+            .director-content p {
+                margin-bottom: 1rem;
+                line-height: 1.7;
+                font-size: 1rem;
+                position: relative;
+                z-index: 1;
+            }
+
+            @media (max-width: 992px) {
+                .director-message {
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .director-image-container {
+                    margin-bottom: 2rem;
+                }
+            }
+        </style>
+
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Values</h2>
+                    <p>The principles that guide our business</p>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-medal"></i>
+                        </div>
+                        <div class="value-content">
+                            <h3>Quality</h3>
+                            <p>We are committed to providing the highest quality products that meet and exceed industry standards.</p>
+                        </div>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-handshake"></i>
+                        </div>
+                        <div class="value-content">
+                            <h3>Integrity</h3>
+                            <p>We conduct our business with honesty, transparency, and ethical practices in all our dealings.</p>
+                        </div>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <div class="value-content">
+                            <h3>Innovation</h3>
+                            <p>We continuously seek new ways to improve our products, processes, and services to better serve our customers.</p>
+                        </div>
+                    </div>
+
+                    <div class="value-card">
+                        <div class="value-icon">
+                            <i class="fas fa-leaf"></i>
+                        </div>
+                        <div class="value-content">
+                            <h3>Sustainability</h3>
+                            <p>We are committed to responsible sourcing and minimizing our environmental impact in all our operations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <style>
+                    .values-grid {
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        gap: 1.5rem;
+                        margin-top: 3rem;
+                    }
+
+                    .value-card {
+                        background: rgba(245, 240, 225, 0.95);
+                        border: 1px solid rgba(201, 166, 100, 0.3);
+                        border-radius: 4px;
+                        padding: 1.8rem;
+                        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+                        transform-style: preserve-3d;
+                        position: relative;
+                        overflow: hidden;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        text-align: center;
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 15px rgba(201, 166, 100, 0.1);
+                    }
+
+                    .value-card::before {
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background: radial-gradient(circle at top right, rgba(201, 166, 100, 0.05), transparent 70%);
+                        z-index: 0;
+                    }
+
+                    .value-card:hover {
+                        transform: translateY(-8px) translateZ(10px);
+                        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 20px rgba(201, 166, 100, 0.2);
+                        border-color: rgba(201, 166, 100, 0.5);
+                    }
+
+                    .value-icon {
+                        width: 80px;
+                        height: 80px;
+                        background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        margin-bottom: 1.5rem;
+                        font-size: 1.8rem;
+                        color: var(--secondary);
+                        position: relative;
+                        z-index: 1;
+                        transition: all 0.3s ease;
+                        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(201, 166, 100, 0.2);
+                        border: 1px solid rgba(201, 166, 100, 0.3);
+                    }
+
+                    .value-card:hover .value-icon {
+                        transform: scale(1.1) translateZ(10px);
+                        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 20px rgba(201, 166, 100, 0.3);
+                        background: linear-gradient(145deg, rgba(10, 15, 44, 0.95), rgba(6, 10, 30, 1));
+                    }
+
+                    .value-content {
+                        position: relative;
+                        z-index: 1;
+                    }
+
+                    .value-content h3 {
+                        color: var(--primary);
+                        margin-bottom: 0.8rem;
+                        font-size: 1.4rem;
+                        letter-spacing: 0.5px;
+                        font-family: 'Rajdhani', sans-serif;
+                    }
+
+                    .value-content p {
+                        color: var(--text-dark);
+                        font-size: 0.95rem;
+                        line-height: 1.6;
+                    }
+                </style>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Join Our Journey</h2>
+                    <p>Partner with us to experience excellence in minerals and metals. Contact our team to discuss your requirements.</p>
+                    <a href="contact.html" class="btn btn-primary">
+                        <span>Contact Us</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Anuradha Minerals & Metals</h3>
+                    <p>A dynamic trading company specializing in high-quality minerals and metals. Focused on professionalism, trust, and building long-term partnerships worldwide.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="products.html">Glycine</a></li>
+                        <li><a href="products.html">Scrap (Ferrous & Non-Ferrous)</a></li>
+                        <li><a href="products.html">Aluminium Ingots</a></li>
+                        <li><a href="products.html">Calcined Lime</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> info@ammindia.in</li>
+                        <li><i class="fas fa-phone"></i> +91 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> New Delhi, India</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Anuradha Minerals and Metals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

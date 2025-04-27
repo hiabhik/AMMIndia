@@ -1,0 +1,12 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+    [headers.values]
+    Basic-Auth = "amm:ammindia2023"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

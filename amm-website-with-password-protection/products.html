@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Anuradha Minerals and Metals</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles for Products page */
+        .products-hero {
+            min-height: 60vh;
+        }
+
+        .product-categories {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            padding: 0.7rem 1.4rem;
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.7), rgba(6, 10, 30, 0.75));
+            border: 1px solid rgba(201, 166, 100, 0.2);
+            border-radius: 4px;
+            color: var(--cream);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-btn:hover,
+        .category-btn.active {
+            background: rgba(201, 166, 100, 0.15);
+            border-color: rgba(201, 166, 100, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 10px rgba(201, 166, 100, 0.2);
+            color: var(--secondary);
+        }
+
+        .product-detail {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 3rem;
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.85), rgba(6, 10, 30, 0.9));
+            border: 1px solid rgba(201, 166, 100, 0.25);
+            border-radius: 4px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d;
+            position: relative;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-detail::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(201, 166, 100, 0.05), transparent 70%);
+            z-index: 0;
+        }
+
+        .product-detail:hover {
+            transform: translateY(-8px) translateZ(10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15), 0 0 15px rgba(201, 166, 100, 0.2);
+            border-color: rgba(201, 166, 100, 0.4);
+        }
+
+        .product-detail-content {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        @media (min-width: 768px) {
+            .product-detail-content {
+                flex-direction: row;
+                padding: 2rem;
+            }
+        }
+
+        .product-detail-image {
+            flex: 1;
+            min-height: 250px;
+            background: rgba(6, 10, 30, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-detail-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 20%;
+            background: linear-gradient(to top, rgba(6, 10, 30, 0.8), transparent);
+        }
+
+        .product-detail-image .image-placeholder {
+            width: 80px;
+            height: 80px;
+            font-size: 2rem;
+            background: rgba(201, 166, 100, 0.1);
+            box-shadow: 0 0 15px rgba(201, 166, 100, 0.3);
+            position: relative;
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+
+        .product-detail:hover .image-placeholder {
+            transform: scale(1.1) translateZ(5px);
+            box-shadow: 0 0 20px rgba(201, 166, 100, 0.4);
+            background: rgba(201, 166, 100, 0.15);
+        }
+
+        .product-detail-info {
+            flex: 1;
+            color: var(--cream);
+        }
+
+        .product-detail-info h3 {
+            font-size: 1.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            letter-spacing: 0.5px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 0.5rem;
+        }
+
+        .product-detail-info h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(to right, var(--secondary), transparent);
+        }
+
+        .product-detail-info p {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+            font-size: 1rem;
+        }
+
+        .product-specs {
+            margin-top: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-specs h4, .product-applications h4 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid rgba(201, 166, 100, 0.2);
+            letter-spacing: 0.5px;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .specs-table tr {
+            border-bottom: 1px solid rgba(201, 166, 100, 0.1);
+        }
+
+        .specs-table tr:last-child {
+            border-bottom: none;
+        }
+
+        .specs-table td {
+            padding: 0.7rem 0;
+            font-size: 0.95rem;
+        }
+
+        .specs-table td:first-child {
+            font-weight: 500;
+            color: var(--text-light);
+            width: 40%;
+        }
+
+        .product-applications {
+            margin-top: 1.5rem;
+        }
+
+        .applications-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+
+        .application-tag {
+            display: inline-block;
+            padding: 0.4rem 0.9rem;
+            background: rgba(10, 15, 44, 0.6);
+            border: 1px solid rgba(201, 166, 100, 0.2);
+            border-radius: 3px;
+            font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+            color: var(--cream);
+        }
+
+        .application-tag:hover {
+            background: rgba(201, 166, 100, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1), 0 0 5px rgba(201, 166, 100, 0.2);
+            border-color: rgba(201, 166, 100, 0.4);
+        }
+
+        /* New Product Card Styles */
+        .product-card-container {
+            margin-bottom: 2rem;
+            perspective: 1000px;
+        }
+
+        .product-card-wrapper {
+            width: 100%;
+            max-width: 350px;
+            margin: 0 auto;
+            height: 450px;
+        }
+
+        .product-card-3d {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .product-card-front,
+        .product-card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            overflow: hidden;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(201, 166, 100, 0.1);
+            border: 1px solid rgba(201, 166, 100, 0.3);
+        }
+
+        .product-card-front {
+            background: rgba(245, 240, 225, 0.95);
+            color: var(--text-dark);
+            align-items: center;
+            text-align: center;
+        }
+
+        .product-card-back {
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+            color: var(--cream);
+            transform: rotateY(180deg);
+        }
+
+        .product-card-wrapper:hover .product-card-3d {
+            transform: rotateY(180deg);
+        }
+
+        .product-icon-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+
+        .product-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: var(--secondary);
+            border: 1px solid rgba(201, 166, 100, 0.3);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15), 0 0 15px rgba(201, 166, 100, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(201, 166, 100, 0.2), transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .product-card-front:hover .product-icon {
+            transform: scale(1.1);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2), 0 0 20px rgba(201, 166, 100, 0.3);
+        }
+
+        .product-card-front:hover .product-icon::before {
+            opacity: 1;
+        }
+
+        .product-card-front h3 {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.8rem;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .product-short-desc {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .product-key-specs {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .key-spec {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.5rem 1rem;
+            background: rgba(201, 166, 100, 0.1);
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .spec-value {
+            color: var(--primary);
+        }
+
+        .view-details-btn, .back-to-front-btn {
+            padding: 0.6rem 1.2rem;
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.9), rgba(6, 10, 30, 0.95));
+            color: var(--cream);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-top: auto;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(201, 166, 100, 0.3);
+        }
+
+        .view-details-btn:hover, .back-to-front-btn:hover {
+            background: linear-gradient(145deg, rgba(10, 15, 44, 0.95), rgba(6, 10, 30, 1));
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 10px rgba(201, 166, 100, 0.2);
+        }
+
+        .back-to-front-btn {
+            background: rgba(201, 166, 100, 0.2);
+            color: var(--cream);
+            margin-top: 1rem;
+            align-self: center;
+        }
+
+        .back-to-front-btn:hover {
+            background: rgba(201, 166, 100, 0.3);
+        }
+
+        .back-content {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .back-content h4 {
+            font-size: 1.1rem;
+            color: var(--secondary);
+            margin-bottom: 0.8rem;
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .specs-list {
+            list-style: none;
+            margin-bottom: 1.2rem;
+        }
+
+        .specs-list li {
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .specs-list li span:first-child {
+            font-weight: 600;
+            color: var(--secondary);
+            margin-right: 0.5rem;
+        }
+
+        .mini-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .mini-tags span {
+            padding: 0.3rem 0.6rem;
+            background: rgba(201, 166, 100, 0.15);
+            border-radius: 3px;
+            font-size: 0.8rem;
+            color: var(--cream);
+            border: 1px solid rgba(201, 166, 100, 0.3);
+        }
+
+        @media (min-width: 768px) {
+            .product-categories {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+                margin-bottom: 3rem;
+            }
+
+            .products-section .container {
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+
+            .products-section .section-header,
+            .products-section .product-categories {
+                grid-column: 1 / -1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="futuristic-background">
+        <div class="grid-overlay"></div>
+        <div class="glow-effect glow-1"></div>
+        <div class="glow-effect glow-2"></div>
+        <div class="glow-effect glow-3"></div>
+        <div class="light-beam"></div>
+        <div class="particles"></div>
+    </div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">
+                    <img src="images/amm-logo-official.svg" alt="AMM Logo" class="logo-image">
+                    <div class="logo-glow"></div>
+                </a>
+
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+
+                <div class="menu-toggle">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero products-hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="glitch-text" data-text="Our Products">Our Products</h1>
+                    <p class="subtitle">Premium Quality Minerals & Metals</p>
+                    <p class="description">Discover our range of high-quality minerals and metals designed to meet the needs of various industries worldwide.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="products-section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Product Categories</h2>
+                    <p>Explore our diverse range of products</p>
+                </div>
+
+                <div class="product-categories">
+                    <button class="category-btn active">All Products</button>
+                    <button class="category-btn">Metals</button>
+                    <button class="category-btn">Minerals</button>
+                    <button class="category-btn">Chemicals</button>
+                </div>
+
+                <div class="product-card-container">
+                    <div class="product-card-wrapper">
+                        <div class="product-card-3d">
+                            <div class="product-card-front">
+                                <div class="product-icon-container">
+                                    <div class="product-icon">
+                                        <i class="fas fa-flask"></i>
+                                    </div>
+                                </div>
+                                <h3>Glycine</h3>
+                                <p class="product-short-desc">High-purity amino acid for pharmaceutical and industrial applications</p>
+                                <div class="product-key-specs">
+                                    <div class="key-spec">
+                                        <span class="spec-label">Purity</span>
+                                        <span class="spec-value">99.0% - 99.8%</span>
+                                    </div>
+                                    <div class="key-spec">
+                                        <span class="spec-label">Formula</span>
+                                        <span class="spec-value">C₂H₅NO₂</span>
+                                    </div>
+                                </div>
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                            <div class="product-card-back">
+                                <div class="back-content">
+                                    <h4>Specifications</h4>
+                                    <ul class="specs-list">
+                                        <li><span>Purity:</span> 99.0% - 99.8%</li>
+                                        <li><span>Appearance:</span> White Crystalline Powder</li>
+                                        <li><span>Formula:</span> C₂H₅NO₂</li>
+                                        <li><span>Melting Point:</span> 232-236°C</li>
+                                        <li><span>Solubility:</span> Highly Soluble in Water</li>
+                                    </ul>
+                                    <h4>Applications</h4>
+                                    <div class="mini-tags">
+                                        <span>Pharmaceuticals</span>
+                                        <span>Food Industry</span>
+                                        <span>Cosmetics</span>
+                                        <span>Chemical Synthesis</span>
+                                    </div>
+                                    <button class="back-to-front-btn">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card-container">
+                    <div class="product-card-wrapper">
+                        <div class="product-card-3d">
+                            <div class="product-card-front">
+                                <div class="product-icon-container">
+                                    <div class="product-icon">
+                                        <i class="fas fa-recycle"></i>
+                                    </div>
+                                </div>
+                                <h3>Scrap (Ferrous & Non-Ferrous)</h3>
+                                <p class="product-short-desc">High-quality recycling materials for manufacturing industries</p>
+                                <div class="product-key-specs">
+                                    <div class="key-spec">
+                                        <span class="spec-label">Types</span>
+                                        <span class="spec-value">Ferrous, Non-Ferrous</span>
+                                    </div>
+                                    <div class="key-spec">
+                                        <span class="spec-label">Quality</span>
+                                        <span class="spec-value">Sorted & Cleaned</span>
+                                    </div>
+                                </div>
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                            <div class="product-card-back">
+                                <div class="back-content">
+                                    <h4>Specifications</h4>
+                                    <ul class="specs-list">
+                                        <li><span>Ferrous:</span> Iron, Steel, Cast Iron</li>
+                                        <li><span>Non-Ferrous:</span> Aluminum, Copper, Brass</li>
+                                        <li><span>UBC Cans:</span> Used Beverage Cans</li>
+                                        <li><span>Quality:</span> Sorted, Cleaned</li>
+                                        <li><span>Processing:</span> Ready for Manufacturing</li>
+                                    </ul>
+                                    <h4>Applications</h4>
+                                    <div class="mini-tags">
+                                        <span>Metal Recycling</span>
+                                        <span>Steel Production</span>
+                                        <span>Aluminum Smelting</span>
+                                        <span>Manufacturing</span>
+                                    </div>
+                                    <button class="back-to-front-btn">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card-container">
+                    <div class="product-card-wrapper">
+                        <div class="product-card-3d">
+                            <div class="product-card-front">
+                                <div class="product-icon-container">
+                                    <div class="product-icon">
+                                        <i class="fas fa-cube"></i>
+                                    </div>
+                                </div>
+                                <h3>Aluminium Ingots</h3>
+                                <p class="product-short-desc">Premium purity ingots for industrial manufacturing</p>
+                                <div class="product-key-specs">
+                                    <div class="key-spec">
+                                        <span class="spec-label">Purity</span>
+                                        <span class="spec-value">99.5% - 99.9%</span>
+                                    </div>
+                                    <div class="key-spec">
+                                        <span class="spec-label">Weight</span>
+                                        <span class="spec-value">20kg Standard</span>
+                                    </div>
+                                </div>
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                            <div class="product-card-back">
+                                <div class="back-content">
+                                    <h4>Specifications</h4>
+                                    <ul class="specs-list">
+                                        <li><span>Purity:</span> 99.5% - 99.9%</li>
+                                        <li><span>Weight:</span> Standard 20kg Ingots</li>
+                                        <li><span>Density:</span> 2.7 g/cm³</li>
+                                        <li><span>Melting Point:</span> 660.3°C</li>
+                                        <li><span>Alloy Options:</span> Pure, ADC12, LM6</li>
+                                    </ul>
+                                    <h4>Applications</h4>
+                                    <div class="mini-tags">
+                                        <span>Die Casting</span>
+                                        <span>Automotive</span>
+                                        <span>Electronics</span>
+                                        <span>Aerospace</span>
+                                    </div>
+                                    <button class="back-to-front-btn">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="product-card-container">
+                    <div class="product-card-wrapper">
+                        <div class="product-card-3d">
+                            <div class="product-card-front">
+                                <div class="product-icon-container">
+                                    <div class="product-icon">
+                                        <i class="fas fa-mountain"></i>
+                                    </div>
+                                </div>
+                                <h3>Calcined Lime</h3>
+                                <p class="product-short-desc">High-grade industrial lime for multiple applications</p>
+                                <div class="product-key-specs">
+                                    <div class="key-spec">
+                                        <span class="spec-label">CaO Content</span>
+                                        <span class="spec-value">90% - 95%</span>
+                                    </div>
+                                    <div class="key-spec">
+                                        <span class="spec-label">Reactivity</span>
+                                        <span class="spec-value">High</span>
+                                    </div>
+                                </div>
+                                <button class="view-details-btn">View Details</button>
+                            </div>
+                            <div class="product-card-back">
+                                <div class="back-content">
+                                    <h4>Specifications</h4>
+                                    <ul class="specs-list">
+                                        <li><span>CaO Content:</span> 90% - 95%</li>
+                                        <li><span>MgO Content:</span> 0.5% - 2.5%</li>
+                                        <li><span>Reactivity:</span> High</li>
+                                        <li><span>Forms:</span> Powder, Granules, Lumps</li>
+                                        <li><span>Bulk Density:</span> 900-1100 kg/m³</li>
+                                    </ul>
+                                    <h4>Applications</h4>
+                                    <div class="mini-tags">
+                                        <span>Steel Manufacturing</span>
+                                        <span>Water Treatment</span>
+                                        <span>Agriculture</span>
+                                        <span>Construction</span>
+                                    </div>
+                                    <button class="back-to-front-btn">Back</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <div class="cta-content">
+                    <h2>Need Custom Solutions?</h2>
+                    <p>Contact our team to discuss your specific requirements and how we can tailor our products to meet your needs.</p>
+                    <a href="contact.html" class="btn btn-primary">
+                        <span>Get in Touch</span>
+                        <div class="btn-glow"></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Anuradha Minerals & Metals</h3>
+                    <p>A dynamic trading company specializing in high-quality minerals and metals. Focused on professionalism, trust, and building long-term partnerships worldwide.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-linkedin"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Products</h3>
+                    <ul>
+                        <li><a href="products.html">Glycine</a></li>
+                        <li><a href="products.html">Scrap (Ferrous & Non-Ferrous)</a></li>
+                        <li><a href="products.html">Aluminium Ingots</a></li>
+                        <li><a href="products.html">Calcined Lime</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-envelope"></i> info@ammindia.in</li>
+                        <li><i class="fas fa-phone"></i> +91 123 456 7890</li>
+                        <li><i class="fas fa-map-marker-alt"></i> New Delhi, India</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2023 Anuradha Minerals and Metals. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
